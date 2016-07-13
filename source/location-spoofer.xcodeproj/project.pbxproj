@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C2F76241D36B2460055FFAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F761C1D36B2460055FFAE /* AppDelegate.swift */; };
+		4C2F76251D36B2460055FFAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F761D1D36B2460055FFAE /* Assets.xcassets */; };
+		4C2F76261D36B2460055FFAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F761F1D36B2460055FFAE /* Main.storyboard */; };
+		4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76211D36B2460055FFAE /* GPXManager.swift */; };
+		4C2F76281D36B2460055FFAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F76221D36B2460055FFAE /* Info.plist */; };
+		4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76231D36B2460055FFAE /* ViewController.swift */; };
+		4C2F762C1D36B3210055FFAE /* GPXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F762B1D36B3210055FFAE /* GPXFile.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4C2F761C1D36B2460055FFAE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "location-spoofer/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
+		4C2F761D1D36B2460055FFAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "location-spoofer/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		4C2F76201D36B2460055FFAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		4C2F76211D36B2460055FFAE /* GPXManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPXManager.swift; path = "location-spoofer/GPXManager.swift"; sourceTree = SOURCE_ROOT; };
+		4C2F76221D36B2460055FFAE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "location-spoofer/Info.plist"; sourceTree = SOURCE_ROOT; };
+		4C2F76231D36B2460055FFAE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "location-spoofer/ViewController.swift"; sourceTree = SOURCE_ROOT; };
+		4C2F762B1D36B3210055FFAE /* GPXFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPXFile.swift; sourceTree = SOURCE_ROOT; };
+		A00847321D362B310023E563 /* location-spoofer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "location-spoofer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A008472F1D362B310023E563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C2F762A1D36B26B0055FFAE /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				4C2F76221D36B2460055FFAE /* Info.plist */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		A00847291D362B310023E563 = {
+			isa = PBXGroup;
+			children = (
+				A00847341D362B310023E563 /* mapemall */,
+				A00847331D362B310023E563 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A00847331D362B310023E563 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A00847321D362B310023E563 /* location-spoofer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A00847341D362B310023E563 /* mapemall */ = {
+			isa = PBXGroup;
+			children = (
+				4C2F761D1D36B2460055FFAE /* Assets.xcassets */,
+				4C2F761F1D36B2460055FFAE /* Main.storyboard */,
+				4C2F761C1D36B2460055FFAE /* AppDelegate.swift */,
+				4C2F76211D36B2460055FFAE /* GPXManager.swift */,
+				4C2F762B1D36B3210055FFAE /* GPXFile.swift */,
+				4C2F76231D36B2460055FFAE /* ViewController.swift */,
+				4C2F762A1D36B26B0055FFAE /* Other */,
+			);
+			path = mapemall;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A00847311D362B310023E563 /* location-spoofer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00847411D362B310023E563 /* Build configuration list for PBXNativeTarget "location-spoofer" */;
+			buildPhases = (
+				A008472E1D362B310023E563 /* Sources */,
+				A008472F1D362B310023E563 /* Frameworks */,
+				A00847301D362B310023E563 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "location-spoofer";
+			productName = mapemall;
+			productReference = A00847321D362B310023E563 /* location-spoofer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A008472A1D362B310023E563 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Szymon Maslanka";
+				TargetAttributes = {
+					A00847311D362B310023E563 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2ZXKX97KAL;
+					};
+				};
+			};
+			buildConfigurationList = A008472D1D362B310023E563 /* Build configuration list for PBXProject "location-spoofer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A00847291D362B310023E563;
+			productRefGroup = A00847331D362B310023E563 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A00847311D362B310023E563 /* location-spoofer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A00847301D362B310023E563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2F76251D36B2460055FFAE /* Assets.xcassets in Resources */,
+				4C2F76261D36B2460055FFAE /* Main.storyboard in Resources */,
+				4C2F76281D36B2460055FFAE /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A008472E1D362B310023E563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */,
+				4C2F76241D36B2460055FFAE /* AppDelegate.swift in Sources */,
+				4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */,
+				4C2F762C1D36B3210055FFAE /* GPXFile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4C2F761F1D36B2460055FFAE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C2F76201D36B2460055FFAE /* Base */,
+			);
+			name = Main.storyboard;
+			path = "../location-spoofer/Base.lproj";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A008473F1D362B310023E563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A00847401D362B310023E563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A00847421D362B310023E563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/location-spoofer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.nahive.location-spoofer";
+				PRODUCT_NAME = "location-spoofer";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A00847431D362B310023E563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/location-spoofer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.nahive.location-spoofer";
+				PRODUCT_NAME = "location-spoofer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A008472D1D362B310023E563 /* Build configuration list for PBXProject "location-spoofer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A008473F1D362B310023E563 /* Debug */,
+				A00847401D362B310023E563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A00847411D362B310023E563 /* Build configuration list for PBXNativeTarget "location-spoofer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00847421D362B310023E563 /* Debug */,
+				A00847431D362B310023E563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A008472A1D362B310023E563 /* Project object */;
+}
