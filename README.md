@@ -1,35 +1,39 @@
-<p align="center">
-<img src="http://i.imgur.com/GfG9PgV.png" alt="Spotr" style="max-width:100%;" width="270px"/>
-<img src="http://i.imgur.com/RjV5xa0.png" alt="Spotr" style="max-width:100%;" width="270px"/>
-<img src="http://imgur.com/TvIGOMT.png" alt="Spotr" style="max-width:100%;" width="270px"/>
+<p align="center"><img src="https://github.com/nahive/location-spoofer/blob/master/preview.png" alt="Location spoofer">
 </p>
 
-# Spotr
-##### *Finding new places made easy*
+# Location Spoofer
+##### *Spoof moving location on iOS device*
 
 ## Features
 
-- [x] Google Places API
-- [x] Suggestions
-- [x] Searching for places
-- [x] Browsing places on cards
-- [x] Browsing places on map
-- [x] Adding places to list of favourites
-- [ ] Removing places from list of favourites
-- [ ] Place details
-- [ ] Gallery of place photos
-- [ ] Settings
+- [x] Simulating moving location
+- [x] Pause&resume
+- [x] Change end location while running
+- [x] Stopping to return to starting location
+- [x] Using both straight line and stick to roads
+- [ ] Settings for walking/driving/bike speed
 
-[Changelog](https://github.com/nahive/spotr/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/nahive/location-spoofer/blob/master/CHANGELOG.md)
 
 ## Building
 
 ```
-$ git clone https://github.com/nahive/spotr.git
-$ cd spotr
-$ pod install
-$ open spotr.xcworkspace
+$ git clone https://github.com/nahive/location-spoofer.git
+$ open location-spoofer.xcodeproj
 ```
+
+##Using
+
+1. Download
+2. Open ```location-spoofer``` app.
+3. Open test project in Xcode. 
+4. Drag the created track.gpx into project and *uncheck* copy files if needed.
+5. Run test project on the device or simulator.
+6. Select start and end location.
+7. Click run.
+7a. If dialog appears that says that script cannot run - in xcode of test project go to menu Debug/Simulate location/track.gpx
+8. Profit
+
 ## Contributing
 
 If you found a **bug**, open an issue.
