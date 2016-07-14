@@ -22,87 +22,68 @@ class GPXManager {
   // much needed enums for saving states
   private enum State {
     case idle
-    case moving
+    case running
     case paused
   }
   
   // props
   weak var delegate: GPXManagerDelegate?
   
+  private var state: State = .idle {
+    didSet {
+      handleStateChange()
+    }
+  }
+  
+  private let file = GPXFile()
   private var timer: NSTimer?
   
-  private var state: State = .idle
-  private let file = GPXFile()
-  
   private var currentIndex = 0
-  private var startLocation: CLLocation!
-  private var currentLocation: CLLocation!
-  private var endLocation: CLLocation!
-  
-  private var locations = [CLLocation]()
-  
-  func create(){
-    file.create()
+  private var startLocation: CLLocationCoordinate2D! {
+    return locations.first!
+  }
+  private var currentLocation: CLLocationCoordinate2D!
+  private var endLocation: CLLocationCoordinate2D! {
+    return locations.last!
   }
   
-  func start(fromLocation start: CLLocation, toLocation end: CLLocation){
-    startLocation = start
-    currentLocation = start
-    endLocation = end
-    currentIndex = 0
-    
-    let distance = end.distanceFromLocation(start)
-    let numberOfSteps = Int(distance/speed)
-    let differenceLat = (end.coordinate.latitude - start.coordinate.latitude) / Double(numberOfSteps)
-    let differenceLng = (end.coordinate.longitude - start.coordinate.longitude) / Double(numberOfSteps)
-    
-    locations.removeAll()
-    
-    for step in 0...numberOfSteps {
-      let delta =  0.000001 * Double(arc4random_uniform(10))
-      locations.append(CLLocation(latitude: start.coordinate.latitude + (differenceLat * Double(step)) + delta,
-        longitude: start.coordinate.longitude + (differenceLng * Double(step)) + delta))
-    }
-    
-    state = .moving
-    file.write(locations)
-    runScript()
-    startTimer()
-  }
+  var locations = [CLLocationCoordinate2D]()
   
-  func start(routeLocations: [CLLocation]){
+  private func run(){
     
-    var fixedLocations = [CLLocation]()
+    var fixedLocations = [CLLocationCoordinate2D]()
     
-    for index in 0...routeLocations.count-1 {
+    for index in 0...locations.count-1 {
       let nextIndex = index+1
-      if nextIndex < routeLocations.count {
-        let start = routeLocations[index]
-        let end = routeLocations[nextIndex]
-        let distance = end.distanceFromLocation(start)
+      if nextIndex < locations.count {
+        let start = locations[index]
+        let end = locations[nextIndex]
+        let distance = CLLocation(coordinate: end).distanceFromLocation(CLLocation(coordinate: start))
         let numberOfSteps = Int(distance/speed)
-        let differenceLat = (end.coordinate.latitude - start.coordinate.latitude) / Double(numberOfSteps)
-        let differenceLng = (end.coordinate.longitude - start.coordinate.longitude) / Double(numberOfSteps)
+        let differenceLat = (end.latitude - start.latitude) / Double(numberOfSteps)
+        let differenceLng = (end.longitude - start.longitude) / Double(numberOfSteps)
         
         for step in 0...numberOfSteps {
           let delta =  0.000001 * Double(arc4random_uniform(10))
-          fixedLocations.append(CLLocation(latitude: start.coordinate.latitude + (differenceLat * Double(step)) + delta,
-            longitude: start.coordinate.longitude + (differenceLng * Double(step)) + delta))
+          fixedLocations.append(CLLocationCoordinate2D(latitude: start.latitude + (differenceLat * Double(step)) + delta,
+            longitude: start.longitude + (differenceLng * Double(step)) + delta))
         }
       } else {
-        fixedLocations.append(routeLocations[index])
+        fixedLocations.append(locations[index])
       }
     }
     
-    startLocation = fixedLocations.first
     currentLocation = fixedLocations.first
-    endLocation = fixedLocations.last
-    
     currentIndex = 0
     
     locations.removeAll()
     locations = fixedLocations
-    state = .moving
+    
+    write(locations)
+  }
+  
+  private func write(locations: [CLLocationCoordinate2D]){
+    state = .running
     file.write(locations)
     runScript()
     startTimer()
@@ -119,17 +100,17 @@ class GPXManager {
     }
   }
   
-  func update(endLocation: CLLocation){
-    start(fromLocation: currentLocation, toLocation: endLocation)
-  }
-  
   func resume(){
     if locations.count > currentIndex {
-      state = .moving
-      start(fromLocation: currentLocation, toLocation: endLocation)
+      state = .running
+      run(fromLocation: currentLocation, toLocation: endLocation)
     } else {
       print("couldn't resume from location")
     }
+  }
+  
+  func stop(){
+    
   }
   
   private func startTimer() {
@@ -166,9 +147,19 @@ class GPXManager {
     }
   }
   
+  private func handleStateChange(){
+    
+  }
+  
   // runs script that selected menu in xcode Debug/Simulate location/track.gpx
   // which refreshes the track on device
   private func runScript(){
     NSWorkspace.sharedWorkspace().launchApplication("RunGPX")
+  }
+}
+
+extension CLLocation {
+  convenience init(coordinate: CLLocationCoordinate2D) {
+    self.init(latitude: coordinate.latitude, longitude: coordinate.longitude)
   }
 }

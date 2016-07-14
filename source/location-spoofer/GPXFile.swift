@@ -16,23 +16,23 @@ class GPXFile {
   var exists: Bool {
     return NSFileManager().fileExistsAtPath(filePath)
   }
-  
-  func create(){
-    if !exists {
-      print("file did not exist. creating gpx file at \(filePath)")
-      if write([CLLocation]()) {
-        print("gpx file created")
-      } else {
-        print("couldn't create file 😐")
-      }
+    
+    init(){
+        if !exists {
+            print("file did not exist. creating gpx file at \(filePath)")
+            if write([CLLocationCoordinate2D]()) {
+                print("gpx file created")
+            } else {
+                print("couldn't create file 😐")
+            }
+        }
     }
-  }
   
-  func write(locations: [CLLocation]) -> Bool {
+  func write(locations: [CLLocationCoordinate2D]) -> Bool {
     var gpxStructure = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx>\n"
     for (index,location) in locations.enumerate() {
       let date = stringFromDate(NSDate().dateByAddingTimeInterval(Double(index)))
-      gpxStructure += "\t<wpt lat=\"\(location.coordinate.latitude)\" lon=\"\(location.coordinate.longitude)\">\n<time>\(date)</time>\n</wpt>\n"
+      gpxStructure += "\t<wpt lat=\"\(location.latitude)\" lon=\"\(location.longitude)\">\n<time>\(date)</time>\n</wpt>\n"
     }
     gpxStructure += "</gpx>"
     
