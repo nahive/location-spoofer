@@ -35,8 +35,8 @@
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="jKD-BT-WOq">
                         <font key="font" metaFont="system"/>
                         <segments>
-                            <segment label="Walking"/>
-                            <segment label="Cycling" selected="YES" tag="1"/>
+                            <segment label="Walking" selected="YES"/>
+                            <segment label="Cycling" tag="1"/>
                             <segment label="Driving"/>
                         </segments>
                     </segmentedCell>

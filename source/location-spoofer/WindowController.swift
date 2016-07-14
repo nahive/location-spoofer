@@ -68,6 +68,7 @@ class WindowController: NSWindowController {
     mapController.delegate = self
     
     settingsController = SettingsViewController(nibName: "SettingsViewController", bundle: Bundle.main())
+    settingsController.delegate = self
     
     window!.titleVisibility = .hidden
     window!.styleMask = [window!.styleMask, NSFullSizeContentViewWindowMask]

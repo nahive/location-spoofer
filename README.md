@@ -11,7 +11,10 @@
 - [x] Change end location while running
 - [x] Stopping to return to starting location
 - [x] Using both straight line and stick to roads
-- [ ] Settings for walking/driving/bike speed
+- [x] Settings for walking/driving/bike speed
+- [ ] Fix bugs
+- [ ] Add more customization options
+- [ ] Ability to add additional locations to route
 
 [Changelog](https://github.com/nahive/location-spoofer/blob/master/CHANGELOG.md)
 
@@ -31,6 +34,7 @@ $ open location-spoofer.xcodeproj
 5. Run test project on the device or simulator.
 6. Select start and end location.
 7. Click run.
+
 7a. If dialog appears that says that script cannot run - in xcode of test project go to menu Debug/Simulate location/track.gpx
 8. Profit
 
