@@ -9,8 +9,7 @@
 import AppKit
 import MapKit
 
-let knownLocations = ["home" : CLLocation(latitude: 51.090313, longitude: 17.044528),
-                      "smt" : CLLocation(latitude:  51.102411, longitude: 17.032319)]
+let knownLocations = ["smt" : CLLocation(latitude:  51.102411, longitude: 17.032319)]
 
 class ViewController: NSViewController {
     
@@ -58,7 +57,7 @@ class ViewController: NSViewController {
         gesture.numberOfClicksRequired = 2
         mapView.addGestureRecognizer(gesture)
         
-        let region = MKCoordinateRegionMakeWithDistance(knownLocations["home"]!.coordinate, 500, 500)
+        let region = MKCoordinateRegionMakeWithDistance(knownLocations["smt"]!.coordinate, 500, 500)
         let adjRegion = mapView.regionThatFits(region)
         mapView.setRegion(adjRegion, animated: true)
     }
