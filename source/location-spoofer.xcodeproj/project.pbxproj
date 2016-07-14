@@ -10,7 +10,6 @@
 		4C2F76241D36B2460055FFAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F761C1D36B2460055FFAE /* AppDelegate.swift */; };
 		4C2F76251D36B2460055FFAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F761D1D36B2460055FFAE /* Assets.xcassets */; };
 		4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76211D36B2460055FFAE /* GPXManager.swift */; };
-		4C2F76281D36B2460055FFAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F76221D36B2460055FFAE /* Info.plist */; };
 		4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76231D36B2460055FFAE /* ViewController.swift */; };
 		A0042D501D37788E006A8260 /* GPXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0042D4F1D37788E006A8260 /* GPXFile.swift */; };
 		A0E0B00F1D379C21007F6F62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0E0B00D1D379C21007F6F62 /* Main.storyboard */; };
@@ -46,6 +45,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		4C9CE7F51D37D659006226FC /* GPX */ = {
+			isa = PBXGroup;
+			children = (
+				4C2F76211D36B2460055FFAE /* GPXManager.swift */,
+				A0042D4F1D37788E006A8260 /* GPXFile.swift */,
+			);
+			name = GPX;
+			sourceTree = "<group>";
+		};
 		A00847291D362B310023E563 = {
 			isa = PBXGroup;
 			children = (
@@ -68,8 +76,7 @@
 				4C2F761D1D36B2460055FFAE /* Assets.xcassets */,
 				A0E0B00D1D379C21007F6F62 /* Main.storyboard */,
 				4C2F761C1D36B2460055FFAE /* AppDelegate.swift */,
-				4C2F76211D36B2460055FFAE /* GPXManager.swift */,
-				A0042D4F1D37788E006A8260 /* GPXFile.swift */,
+				4C9CE7F51D37D659006226FC /* GPX */,
 				4C2F76231D36B2460055FFAE /* ViewController.swift */,
 				4C2F762A1D36B26B0055FFAE /* Other */,
 			);
@@ -105,12 +112,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Szymon Maslanka";
 				TargetAttributes = {
 					A00847311D362B310023E563 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 2ZXKX97KAL;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -139,7 +147,6 @@
 			files = (
 				A0E0B00F1D379C21007F6F62 /* Main.storyboard in Resources */,
 				4C2F76251D36B2460055FFAE /* Assets.xcassets in Resources */,
-				4C2F76281D36B2460055FFAE /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +287,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.nahive.location-spoofer";
 				PRODUCT_NAME = "location-spoofer";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -293,6 +301,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.nahive.location-spoofer";
 				PRODUCT_NAME = "location-spoofer";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Szymon Maslanka. All rights reserved.
 //
 
-import AppKit
+//import AppKit
 import MapKit
 
 let knownLocations = ["smt" : CLLocation(latitude:  51.102411, longitude: 17.032319)]
@@ -28,20 +28,24 @@ class ViewController: NSViewController {
   @IBOutlet weak var pauseButton: NSButton!
   @IBOutlet weak var routeCheckMark: NSButton!
   
-  let manager = GPXManager()
+  private let manager = GPXManager()
   
-  var startAnnotation: Annotation?
-  var currentAnnotation: Annotation?
-  var endAnnotation: Annotation?
-  var routePolyline: MKPolyline?
+  private var startAnnotation: Annotation?
+  private var currentAnnotation: Annotation?
+  private var endAnnotation: Annotation?
+  private var routePolyline: MKPolyline?
   
-  var state: State = .idle {
+  private var locations: [CLLocationCoordinate2D]?
+  
+  private var state: State = .idle {
     didSet {
       handleStateChange()
     }
   }
   
-  var shouldUseRoute = true
+  private var shouldStickToRoads: Bool {
+    return routeCheckMark.state == NSOnState
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,133 +54,145 @@ class ViewController: NSViewController {
   
   private func setup(){
     state = .idle
-    visualEffectView.wantsLayer = true
     manager.delegate = self
-    manager.create()
+    
     setupMapView()
-    setupAnnotations()
+    
+    // needed for displaying transparency over map
+    visualEffectView.wantsLayer = true
   }
   
   private func setupMapView(){
     mapView.delegate = self
     mapView.showsCompass = false
     mapView.showsUserLocation = true
-    
-    let gesture = NSClickGestureRecognizer(target: self, action: #selector(mouseClick(_:)))
-    mapView.addGestureRecognizer(gesture)
+    mapView.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(mouseClick(_:))))
     
     let region = MKCoordinateRegionMakeWithDistance(knownLocations["smt"]!.coordinate, 500, 500)
     let adjRegion = mapView.regionThatFits(region)
     mapView.setRegion(adjRegion, animated: true)
   }
   
-  private func setupAnnotations(){
-    startAnnotation = Annotation(title: "Starting location", coordinate: CLLocationCoordinate2D())
-    currentAnnotation = Annotation(title: "Current location", coordinate: CLLocationCoordinate2D())
-    endAnnotation = Annotation(title: "End location",
-                               coordinate: CLLocationCoordinate2D())
-  }
-  
+  //MARK: clicks
   @IBAction func startButtonClicked(sender: NSButton) {
-    if sender.state == NSOnState {
-      state = .selectingStart
-    } else {
-      if let _ = startAnnotation {
-        state = .ready
-      } else {
-        state = .idle
-      }
-    }
+    state = sender.state == NSOnState ? .selectingStart : endAnnotation != nil ? .ready : .idle
   }
   
   @IBAction func endButtonClicked(sender: NSButton) {
-    if sender.state == NSOnState {
-      state = .selectingEnd
-    } else {
-      if let _ = endAnnotation {
-        state = .ready
-      } else {
-        state = .idle
-      }
-    }
+    state = sender.state == NSOnState ? .selectingEnd : startAnnotation != nil ? .ready : .idle
   }
   
   @IBAction func runButtonClicked(sender: NSButton) {
-    if state == .ready {
-      state = .running
+    state = state == .ready ? .running : .ready
+    switch state {
+    case .ready:
+      state = .idle
+      manager.stop()
+    case .running:
+      guard let locations = locations else {
+        print("can't start. no locations")
+        state = .ready
+        return
+      }
+      manager.run(locations: locations)
+    default:
+      break
     }
   }
   
   @IBAction func pauseButtonClicked(sender: NSButton) {
     state = sender.state == NSOnState ? .paused : .running
-  }
-  
-  @IBAction func routeCheckmarkClicked(sender: NSButton) {
-    shouldUseRoute = sender.state == NSOnState
-    if shouldUseRoute {
-      fetchRoute({ (route) in
-        if let route = route {
-          self.drawRoute(self.parseRoute(route))
-        }
-      })
-    } else {
-      drawRoute(<#T##locations: [CLLocationCoordinate2D]##[CLLocationCoordinate2D]#>)
+    switch state {
+    case .paused:
+      manager.pause()
+    case .running:
+      manager.resume()
+    default:
+      break
     }
   }
   
-  func mouseClick(recognizer: NSClickGestureRecognizer){
-    let point = recognizer.locationInView(mapView)
-    let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
+  @IBAction func routeCheckmarkClicked(sender: NSButton) {
+    drawRoute()
+  }
+  
+  func mouseClick(_ recognizer: NSClickGestureRecognizer){
+    let point = recognizer.location(in: mapView)
+    let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
     switch state {
     case .idle:
       break
-    case .starting:
+    case .selectingStart:
       startLocationLabel.stringValue = "lat: \(coordinate.latitude)\nlng: \(coordinate.longitude)"
-      if !(mapView.annotations.contains{ $0.isEqual(startAnnotation) }) {
-        mapView.addAnnotation(startAnnotation)
+      if startAnnotation == nil {
+        startAnnotation = Annotation(title: "Starting location", coordinate: CLLocationCoordinate2D())
+        mapView.addAnnotation(startAnnotation!)
       }
-      startAnnotation.coordinate = coordinate
+      startAnnotation?.coordinate = coordinate
       startButton.state = NSOffState
-      startButtonClicked(startButton)
+      startButtonClicked(sender: startButton)
       
       mapView.removeOverlays(mapView.overlays)
-      if shouldUseRoute {
-        markRoute(startAnnotation.coordinate, end: endAnnotation.coordinate, done: { (locations) in })
-      } else {
-        markLine(startAnnotation.coordinate, end: endAnnotation.coordinate)
-      }
-    case .ending:
+      drawRoute()
+    case .selectingEnd:
       endLocationLabel.stringValue = "lat: \(coordinate.latitude)\nlng: \(coordinate.longitude)"
-      if !(mapView.annotations.contains{ $0.isEqual(endAnnotation) }) {
-        mapView.addAnnotation(endAnnotation)
+      if endAnnotation == nil {
+        endAnnotation = Annotation(title: "End location", coordinate: CLLocationCoordinate2D())
+        mapView.addAnnotation(endAnnotation!)
       }
-      endAnnotation.coordinate = coordinate
       endButton.state = NSOffState
-      endButtonClicked(endButton)
+      endAnnotation?.coordinate = coordinate
+      endButtonClicked(sender: endButton)
       
       mapView.removeOverlays(mapView.overlays)
-      if shouldUseRoute {
-        markRoute(startAnnotation.coordinate, end: endAnnotation.coordinate, done: { (locations) in })
-      } else {
-        markLine(startAnnotation.coordinate, end: endAnnotation.coordinate)
-      }
-      
-      if isRunning {
-        if shouldUseRoute {
-          markRoute(currentAnnotation.coordinate, end: endAnnotation.coordinate, done: { (locations) in
-            dispatch_async(dispatch_get_main_queue(), {
-              self.manager.start(locations)
-            })
-          })
-        } else {
-          markLine(currentAnnotation.coordinate, end: endAnnotation.coordinate)
-          manager.update(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
-        }
-      }
+      drawRoute()
+      proceed()
+    case .ready:
+      break
+    case .paused, .running:
+      break
+    }
+  }
+  
+  private func proceed(){
+    
+    //    if runButton.state == NSOffState {
+    //      manager.update(startAnnotation!.location)
+    //    } else {
+    //      if shouldUseRoute {
+    //        manager.start(routeLocations)
+    //      } else {
+    //        manager.start(fromLocation: startAnnotation!.location, toLocation: endAnnotation!.location)
+    //      }
+    //    }
+    //    if isRunning {
+    //      if shouldUseRoute {
+    //        markRoute(currentAnnotation.coordinate, end: endAnnotation.coordinate, done: { (locations) in
+    //          DispatchQueue.main.async(execute: {
+    //            self.manager.start(locations)
+    //          })
+    //        })
+    //      } else {
+    //        markLine(currentAnnotation.coordinate, end: endAnnotation.coordinate)
+    //        manager.update(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+    //      }
+    //    }
+  }
+  
+  //MARK: routes
+  private func drawRoute(){
+    if shouldStickToRoads {
+      fetchRoute {
+        self.locations = self.parseRoute(route: $0)
+        self.drawRoute(locations: self.locations) }
+    } else {
+      locations = parseLocations(start: startAnnotation?.coordinate, end: endAnnotation?.coordinate)
+      drawRoute(locations: self.locations)
     }
   }
   
   private func fetchRoute(completion: (route: MKRoute?) -> Void) {
+    print("fetching route")
     guard let startCoordinate = startAnnotation?.coordinate,
       let endCoordinate = endAnnotation?.coordinate else {
         print("something bad happened, one of annotations is nil")
@@ -189,11 +205,10 @@ class ViewController: NSViewController {
     let end = MKPlacemark(coordinate: endCoordinate, addressDictionary: nil)
     directionRequest.source = MKMapItem(placemark: start)
     directionRequest.destination = MKMapItem(placemark: end)
-    directionRequest.transportType = .Walking
+    directionRequest.transportType = .walking
     
     let directions = MKDirections(request: directionRequest)
-    
-    directions.calculateDirectionsWithCompletionHandler({ (response, error) in
+    directions.calculate(completionHandler: { (response, error) in
       guard let response = response else {
         if let error = error {
           print(error.localizedDescription)
@@ -208,28 +223,52 @@ class ViewController: NSViewController {
     })
   }
   
-  private func parseRoute(route: MKRoute) -> [CLLocationCoordinate2D] {
-    var coordsPointer = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(route.polyline.pointCount)
+  private func parseRoute(route: MKRoute?) -> [CLLocationCoordinate2D]? {
+    print("parsing route")
+    guard let route = route else {
+      print("can't parse nil route 🤔")
+      return nil
+    }
+    
+    let coordsPointer = UnsafeMutablePointer<CLLocationCoordinate2D>(allocatingCapacity: route.polyline.pointCount)
     route.polyline.getCoordinates(coordsPointer, range: NSMakeRange(0, route.polyline.pointCount))
     
     var locations = [CLLocationCoordinate2D]()
     for i in 0..<route.polyline.pointCount {
       locations.append(CLLocationCoordinate2D(latitude: coordsPointer[i].latitude,
-        longitude: coordsPointer[i].longitude))
+                                              longitude: coordsPointer[i].longitude))
     }
-    coordsPointer.dealloc(route.polyline.pointCount)
+    coordsPointer.deallocateCapacity(route.polyline.pointCount)
     return locations
   }
   
-  private func drawRoute(locations: [CLLocationCoordinate2D]) {
-    var locations = locations
-    routePolyline = MKPolyline(coordinates: &locations, count: locations.count)
-    dispatch_async(dispatch_get_main_queue()) {
-      self.mapView.addOverlay((self.routePolyline!), level: MKOverlayLevel.AboveRoads)
+  private func parseLocations(start: CLLocationCoordinate2D?, end: CLLocationCoordinate2D?) -> [CLLocationCoordinate2D]? {
+    print("paring locations")
+    guard let start = start, let end = end else {
+      print("can't parse nil locations 🤔")
+      return nil
     }
+    return [start, end]
   }
   
+  private func drawRoute(locations: [CLLocationCoordinate2D]?) {
+    print("drawing route")
+    guard var locations = locations else {
+      return print("can't draw nil route 🤔")
+    }
+    
+    if let routePolyline = routePolyline {
+      mapView.remove(routePolyline)
+    }
+    
+    routePolyline = MKPolyline(coordinates: &locations, count: locations.count)
+    mapView.add((routePolyline!), level: MKOverlayLevel.aboveRoads)
+    
+  }
+  
+  //MARK: handling state changes
   private func handleStateChange(){
+    print(state.rawValue)
     statusLabel.stringValue = state.rawValue
     switch state {
     case .idle:
@@ -248,17 +287,74 @@ class ViewController: NSViewController {
   }
   
   private func idleState(){
-    startButton.enabled = true
+    startButton.isEnabled = true
+    startButton.state = NSOffState
+    endButton.isEnabled = true
+    endButton.state = NSOffState
+    pauseButton.isEnabled = false
+    pauseButton.state = NSOffState
+    runButton.isEnabled = false
+    runButton.state = NSOffState
+  }
+  
+  private func selectingStartState(){
+    startButton.isEnabled = true
     startButton.state = NSOnState
-    endButton.enabled = true
+    endButton.isEnabled = false
+    endButton.state = NSOffState
+    pauseButton.isEnabled = false
+    pauseButton.state = NSOffState
+    runButton.isEnabled = false
+    runButton.state = NSOffState
+  }
+  
+  private func selectingEndState(){
+    startButton.isEnabled = false
+    startButton.state = NSOffState
+    endButton.isEnabled = true
     endButton.state = NSOnState
-    pauseButton.enabled = false
-    pauseButton.state = NSOnState
-    runButton.enabled = false
+    pauseButton.isEnabled = false
+    pauseButton.state = NSOffState
+    runButton.isEnabled = false
+    runButton.state = NSOffState
+  }
+  
+  private func readyState(){
+    startButton.isEnabled = true
+    startButton.state = NSOffState
+    endButton.isEnabled = true
+    endButton.state = NSOffState
+    pauseButton.isEnabled = false
+    pauseButton.state = NSOffState
+    runButton.isEnabled = true
+    runButton.state = NSOffState
+  }
+  
+  private func runningState(){
+    startButton.isEnabled = false
+    startButton.state = NSOffState
+    endButton.isEnabled = true
+    endButton.state = NSOffState
+    pauseButton.isEnabled = true
+    pauseButton.state = NSOffState
+    runButton.isEnabled = true
     runButton.state = NSOnState
-    
+  }
+  
+  private func pausedState(){
+    startButton.isEnabled = false
+    startButton.state = NSOffState
+    endButton.isEnabled = true
+    endButton.state = NSOffState
+    pauseButton.isEnabled = true
+    pauseButton.state = NSOnState
+    runButton.isEnabled = true
+    runButton.state = NSOnState
+  }
+  
+  private func clearMap(){
     if let route = routePolyline {
-      mapView.removeOverlay(route)
+      mapView.remove(route)
     }
     
     if let start = startAnnotation {
@@ -273,115 +369,55 @@ class ViewController: NSViewController {
       mapView.removeAnnotation(end)
     }
   }
-  
-  private func selectingStartState(){
-    startButton.enabled = true
-    startButton.state = NSOffState
-    endButton.enabled = false
-    endButton.state = NSOnState
-    pauseButton.enabled = false
-    pauseButton.state = NSOnState
-    runButton.enabled = false
-    runButton.state = NSOnState
-  }
-  
-  private func selectingEndState(){
-    startButton.enabled = false
-    startButton.state = NSOnState
-    endButton.enabled = true
-    endButton.state = NSOffState
-    pauseButton.enabled = false
-    pauseButton.state = NSOnState
-    runButton.enabled = false
-    runButton.state = NSOnState
-  }
-  
-  private func readyState(){
-    startButton.enabled = true
-    startButton.state = NSOnState
-    endButton.enabled = true
-    endButton.state = NSOnState
-    pauseButton.enabled = false
-    pauseButton.state = NSOnState
-    runButton.enabled = true
-    runButton.state = NSOnState
-  }
-  
-  private func runningState(){
-    startButton.enabled = false
-    startButton.state = NSOnState
-    endButton.enabled = true
-    endButton.state = NSOnState
-    pauseButton.enabled = true
-    pauseButton.state = NSOnState
-    runButton.enabled = true
-    runButton.state = NSOffState
-    
-    if runButton.state == NSOffState {
-      manager.update(startAnnotation!.location)
-    } else {
-      if shouldUseRoute {
-        manager.start(routeLocations)
-      } else {
-        manager.start(fromLocation: startAnnotation!.location, toLocation: endAnnotation!.location)
-      }
-    }
-  }
-  
-  private func pausedState(){
-    startButton.enabled = false
-    startButton.state = NSOnState
-    endButton.enabled = true
-    endButton.state = NSOnState
-    pauseButton.enabled = true
-    pauseButton.state = NSOffState
-    runButton.enabled = true
-    runButton.state = NSOffState
-  }
 }
 
+//MARK: MKMapViewDelegate
 extension ViewController: MKMapViewDelegate {
-  
-  func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     let renderer = MKPolylineRenderer(overlay: overlay)
-    renderer.strokeColor = NSColor.purpleColor()
+    renderer.strokeColor = NSColor.purple()
     renderer.lineWidth = 4.0
     return renderer
   }
   
-  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     let pinView = MKPinAnnotationView()
     if annotation.isEqual(startAnnotation) {
-      pinView.pinTintColor = .greenColor()
+      pinView.pinTintColor = .green()
     } else if annotation.isEqual(currentAnnotation) {
-      pinView.pinTintColor = .purpleColor()
+      pinView.pinTintColor = .purple()
     } else if annotation.isEqual(endAnnotation) {
-      pinView.pinTintColor = .redColor()
+      pinView.pinTintColor = .red()
     }
     pinView.centerOffset = CGPoint(x: 8, y: -16)
     return pinView
   }
 }
 
+//MARK: GPXManagerDelegate
 extension ViewController: GPXManagerDelegate {
-  func gpxManager(manager: GPXManager, didUpdateCurrentLocation location: CLLocation) {
-    dispatch_async(dispatch_get_main_queue()) {
-      if !(self.mapView.annotations.contains{ $0.isEqual(self.currentAnnotation) }) {
-        self.mapView.addAnnotation(self.currentAnnotation)
-      }
-      self.currentAnnotation.coordinate = location.coordinate
-      self.currentAnnotation.coordinate = location.coordinate
+  func gpxManager(manager: GPXManager, didUpdateCurrentLocation location: CLLocationCoordinate2D?) {
+    
+    guard let location = location else {
+      print("can't mark current location. location is nil")
+      return
     }
+    
+    if currentAnnotation == nil {
+      currentAnnotation = Annotation(title: "Current location", coordinate: CLLocationCoordinate2D())
+      mapView.addAnnotation(self.currentAnnotation!)
+    }
+    currentAnnotation?.coordinate = location
+    
   }
   
-  func gpxManager(manager: GPXManager, didCompleteRouteAtLocation location: CLLocation) {
-    dispatch_async(dispatch_get_main_queue()) {
-      self.mapView.removeAnnotations([self.currentAnnotation,self.startAnnotation,self.endAnnotation])
-      self.mapView.removeOverlays(self.mapView.overlays)
-    }
+  func gpxManager(manager: GPXManager, didCompleteRouteAtLocation location: CLLocationCoordinate2D?) {
+    state = .idle
+    clearMap()
   }
 }
 
+//MARK: help class for annotation
 class Annotation: NSObject, MKAnnotation {
   var title: String?
   dynamic var coordinate: CLLocationCoordinate2D

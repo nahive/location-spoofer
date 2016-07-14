@@ -6,38 +6,43 @@
 //  Copyright © 2016 Szymon Maslanka. All rights reserved.
 //
 
-import Foundation
 import MapKit
 
 class GPXFile {
   
+  // time offset in seconds for first location so manager can play catchup
+  let timeOffset = 5.0
   let filePath = "track.gpx"
+  var locations = [CLLocationCoordinate2D]()
   
   var exists: Bool {
-    return NSFileManager().fileExistsAtPath(filePath)
+    return FileManager().fileExists(atPath: filePath)
   }
-    
-    init(){
-        if !exists {
-            print("file did not exist. creating gpx file at \(filePath)")
-            if write([CLLocationCoordinate2D]()) {
-                print("gpx file created")
-            } else {
-                print("couldn't create file 😐")
-            }
-        }
-    }
   
-  func write(locations: [CLLocationCoordinate2D]) -> Bool {
-    var gpxStructure = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx>\n"
-    for (index,location) in locations.enumerate() {
-      let date = stringFromDate(NSDate().dateByAddingTimeInterval(Double(index)))
-      gpxStructure += "\t<wpt lat=\"\(location.latitude)\" lon=\"\(location.longitude)\">\n<time>\(date)</time>\n</wpt>\n"
+  init(){
+    if !exists {
+      print("file did not exist. creating gpx file at \(filePath)")
+      if write([CLLocationCoordinate2D]()) {
+        print("gpx file created")
+      } else {
+        print("couldn't create file 😐")
+      }
     }
-    gpxStructure += "</gpx>"
+  }
+  
+  func write(_ locations: [CLLocationCoordinate2D]) -> Bool {
+    let gpxStart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx>\n"
+    var gpxMiddle = ""
+    for (index,location) in locations.enumerated() {
+      let date = stringFromDate(Date().addingTimeInterval(timeOffset + Double(index)))
+      gpxMiddle += "\t<wpt lat=\"\(location.latitude)\" lon=\"\(location.longitude)\">\n<time>\(date)</time>\n</wpt>\n"
+    }
+    let gpxEnd = "</gpx>"
+    let gpxFull = gpxStart + gpxMiddle + gpxEnd
     
     do {
-      try gpxStructure.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
+      try gpxFull.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+      self.locations = locations
       print("file was written")
       return true
     } catch {
@@ -48,18 +53,18 @@ class GPXFile {
   
   private func read() -> String? {
     if exists {
-      return try? String(contentsOfFile: filePath, encoding: NSUTF8StringEncoding)
+      return try? String(contentsOfFile: filePath, encoding: String.Encoding.utf8)
     }
     return nil
   }
   
-  private func stringFromDate(date: NSDate) -> String {
-    let dateFormatter = NSDateFormatter()
+  private func stringFromDate(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    let timeFormatter = NSDateFormatter()
+    let timeFormatter = DateFormatter()
     timeFormatter.dateFormat = "HH:mm:ss"
-    let dateString = dateFormatter.stringFromDate(date)
-    let timeString = timeFormatter.stringFromDate(date)
+    let dateString = dateFormatter.string(from: date)
+    let timeString = timeFormatter.string(from: date)
     return dateString+"T"+timeString+"Z"
   }
 }
