@@ -34,8 +34,7 @@ $ open location-spoofer.xcodeproj
 5. Run test project on the device or simulator.
 6. Select start and end location.
 7. Click run.
-
-7a. If dialog appears that says that script cannot run - in xcode of test project go to menu Debug/Simulate location/track.gpx
+7. If dialog appears that says that script cannot run - in xcode of test project go to menu Debug/Simulate location/track.gpx
 8. Profit
 
 ## Contributing
