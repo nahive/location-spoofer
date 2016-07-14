@@ -122,7 +122,8 @@ class ViewController: NSViewController {
     }
     
     func mouseClick(recognizer: NSClickGestureRecognizer){
-        let coordinate = mapView.convertPoint(recognizer.locationInView(mapView), toCoordinateFromView: mapView)
+        let point = recognizer.locationInView(mapView)
+        let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
         switch state {
         case .idle:
             break
@@ -134,6 +135,13 @@ class ViewController: NSViewController {
             startAnnotation.coordinate = coordinate
             startButton.state = NSOffState
             startButtonClicked(startButton)
+            
+            mapView.removeOverlays(mapView.overlays)
+            if shouldUseRoute {
+                markRoute(startAnnotation.coordinate, end: endAnnotation.coordinate, done: { (locations) in })
+            } else {
+                markLine(startAnnotation.coordinate, end: endAnnotation.coordinate)
+            }
         case .ending:
             endLocationLabel.stringValue = "lat: \(coordinate.latitude)\nlng: \(coordinate.longitude)"
             if !(mapView.annotations.contains{ $0.isEqual(endAnnotation) }) {
@@ -220,16 +228,16 @@ extension ViewController: MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let view = MKPinAnnotationView()
+        let pinView = MKPinAnnotationView()
         if annotation.isEqual(startAnnotation) {
-            view.pinTintColor = .greenColor()
+            pinView.pinTintColor = .greenColor()
         } else if annotation.isEqual(currentAnnotation) {
-            view.pinTintColor = .purpleColor()
+            pinView.pinTintColor = .purpleColor()
         } else if annotation.isEqual(endAnnotation) {
-            view.pinTintColor = .redColor()
+            pinView.pinTintColor = .redColor()
         }
-        
-        return view
+        pinView.centerOffset = CGPoint(x: 8, y: -16)
+        return pinView
     }
 }
 
@@ -253,6 +261,7 @@ extension ViewController: GPXManagerDelegate {
         pauseButton.enabled = false
         dispatch_async(dispatch_get_main_queue()) { 
             self.mapView.removeAnnotations([self.currentAnnotation,self.startAnnotation,self.endAnnotation])
+            self.mapView.removeOverlays(self.mapView.overlays)
         }
     }
 }

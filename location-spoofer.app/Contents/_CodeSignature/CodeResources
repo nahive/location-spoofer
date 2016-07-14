@@ -8,7 +8,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U5jV6NR8IlKGxQ2HN9lTly984Uw=
+			emzJzVYrJjrM5zttInlLGMm/sCE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -17,7 +17,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dQj27s0qWjpz/2CEP4W8A9uJVN4=
+			76ofMwPR9QYhBnQWZkoKSphS0gc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -26,7 +26,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oL9l0Rzw+Sw3CN4bOHqmmjAsR4Y=
+			5UJQr59cmpI7S706b2H/HqN+p3E=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -35,11 +35,15 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fI2M8wM0s2m/B5eGQpkjc3meUU0=
+			G+JnBjsbcwqgp1ShZaWcOW5tfd0=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>Resources/Info.plist</key>
+		<data>
+		wGfzSAh1gXhmUXdbhFZDEZgpwRY=
+		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -146,11 +150,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U5jV6NR8IlKGxQ2HN9lTly984Uw=
+			emzJzVYrJjrM5zttInlLGMm/sCE=
 			</data>
 			<key>hash2</key>
 			<data>
-			IveiMnkuT4a6e9R5gakWws9rokCgmakj9sCokNJ/8yY=
+			9reKGxl6qzuu69Cwi3yn4pRX2nFVXL1P9YA87884Zk0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -159,11 +163,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dQj27s0qWjpz/2CEP4W8A9uJVN4=
+			76ofMwPR9QYhBnQWZkoKSphS0gc=
 			</data>
 			<key>hash2</key>
 			<data>
-			f70xxm8z51TxsnhFleqmCtbUko7PGGc2aAA3CCuqcbk=
+			m3DaJGaysq5fz5d5S0SjfXwubd6WXRlxesk+djVu5HY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -172,11 +176,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oL9l0Rzw+Sw3CN4bOHqmmjAsR4Y=
+			5UJQr59cmpI7S706b2H/HqN+p3E=
 			</data>
 			<key>hash2</key>
 			<data>
-			LIE05PK3Aau4bHkCuEHnIHXgL7q5mwPnVk+7eJwtKEQ=
+			+64lFoTHmWxU18U/nEKKPLMb9mKErOOfjaXLWWVKyuI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -185,14 +189,25 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fI2M8wM0s2m/B5eGQpkjc3meUU0=
+			G+JnBjsbcwqgp1ShZaWcOW5tfd0=
 			</data>
 			<key>hash2</key>
 			<data>
-			3nPrdQKCmLAUqGIWJ/EWXXyQmplovBy34Bs0aVglTU8=
+			xI5l8MlMK/LFZW+zWW1DdKmT5Il8xsJmBrM6hJWj1qE=
 			</data>
 			<key>optional</key>
 			<true/>
+		</dict>
+		<key>Resources/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wGfzSAh1gXhmUXdbhFZDEZgpwRY=
+			</data>
+			<key>hash2</key>
+			<data>
+			Gd/neHIn+vi8ekba60ZvMuqE7mdX1rZPseIT7NQCvyg=
+			</data>
 		</dict>
 	</dict>
 	<key>rules</key>

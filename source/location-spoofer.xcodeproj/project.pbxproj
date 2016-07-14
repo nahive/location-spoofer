@@ -13,7 +13,7 @@
 		4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76211D36B2460055FFAE /* GPXManager.swift */; };
 		4C2F76281D36B2460055FFAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F76221D36B2460055FFAE /* Info.plist */; };
 		4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76231D36B2460055FFAE /* ViewController.swift */; };
-		4C2F762C1D36B3210055FFAE /* GPXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F762B1D36B3210055FFAE /* GPXFile.swift */; };
+		A0042D501D37788E006A8260 /* GPXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0042D4F1D37788E006A8260 /* GPXFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		4C2F76211D36B2460055FFAE /* GPXManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPXManager.swift; path = "location-spoofer/GPXManager.swift"; sourceTree = SOURCE_ROOT; };
 		4C2F76221D36B2460055FFAE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "location-spoofer/Info.plist"; sourceTree = SOURCE_ROOT; };
 		4C2F76231D36B2460055FFAE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "location-spoofer/ViewController.swift"; sourceTree = SOURCE_ROOT; };
-		4C2F762B1D36B3210055FFAE /* GPXFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPXFile.swift; sourceTree = SOURCE_ROOT; };
+		A0042D4F1D37788E006A8260 /* GPXFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPXFile.swift; path = "location-spoofer/GPXFile.swift"; sourceTree = SOURCE_ROOT; };
 		A00847321D362B310023E563 /* location-spoofer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "location-spoofer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -49,7 +49,7 @@
 		A00847291D362B310023E563 = {
 			isa = PBXGroup;
 			children = (
-				A00847341D362B310023E563 /* mapemall */,
+				A00847341D362B310023E563 /* location-spoofer */,
 				A00847331D362B310023E563 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,17 +62,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A00847341D362B310023E563 /* mapemall */ = {
+		A00847341D362B310023E563 /* location-spoofer */ = {
 			isa = PBXGroup;
 			children = (
 				4C2F761D1D36B2460055FFAE /* Assets.xcassets */,
 				4C2F761F1D36B2460055FFAE /* Main.storyboard */,
 				4C2F761C1D36B2460055FFAE /* AppDelegate.swift */,
 				4C2F76211D36B2460055FFAE /* GPXManager.swift */,
-				4C2F762B1D36B3210055FFAE /* GPXFile.swift */,
+				A0042D4F1D37788E006A8260 /* GPXFile.swift */,
 				4C2F76231D36B2460055FFAE /* ViewController.swift */,
 				4C2F762A1D36B26B0055FFAE /* Other */,
 			);
+			name = "location-spoofer";
 			path = mapemall;
 			sourceTree = "<group>";
 		};
@@ -86,6 +87,7 @@
 				A008472E1D362B310023E563 /* Sources */,
 				A008472F1D362B310023E563 /* Frameworks */,
 				A00847301D362B310023E563 /* Resources */,
+				A0042D531D377A30006A8260 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -143,6 +145,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A0042D531D377A30006A8260 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -R \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\" \"$(dirname ${PROJECT_DIR})\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A008472E1D362B310023E563 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -151,7 +169,7 @@
 				4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */,
 				4C2F76241D36B2460055FFAE /* AppDelegate.swift in Sources */,
 				4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */,
-				4C2F762C1D36B3210055FFAE /* GPXFile.swift in Sources */,
+				A0042D501D37788E006A8260 /* GPXFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

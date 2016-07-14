@@ -26,15 +26,6 @@ class GPXManager {
     case paused
   }
   
-  enum Options: String {
-    case create = "create"
-    case start = "start"
-    case pause = "pause"
-    case resume = "resume"
-    case move = "move"
-    case end = "end"
-  }
-  
   // props
   weak var delegate: GPXManagerDelegate?
   
@@ -143,7 +134,7 @@ class GPXManager {
   
   private func startTimer() {
     if timer == nil {
-      timer = NSTimer.scheduledTimerWithTimeInterval(1.2, target: self, selector: #selector(updateCurrentLocation), userInfo: nil, repeats: true)
+      timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(updateCurrentLocation), userInfo: nil, repeats: true)
     }
     timer?.fire()
   }
