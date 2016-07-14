@@ -10,7 +10,10 @@
 		4C2F76241D36B2460055FFAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F761C1D36B2460055FFAE /* AppDelegate.swift */; };
 		4C2F76251D36B2460055FFAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F761D1D36B2460055FFAE /* Assets.xcassets */; };
 		4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76211D36B2460055FFAE /* GPXManager.swift */; };
-		4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76231D36B2460055FFAE /* ViewController.swift */; };
+		4C2F76291D36B2460055FFAE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F76231D36B2460055FFAE /* MapViewController.swift */; };
+		4CA2190D1D382F6F00F7A031 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA2190C1D382F6F00F7A031 /* WindowController.swift */; };
+		4CA86E081D3847070098B17A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA86E061D3847070098B17A /* SettingsViewController.swift */; };
+		4CA86E091D3847070098B17A /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA86E071D3847070098B17A /* SettingsViewController.xib */; };
 		A0042D501D37788E006A8260 /* GPXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0042D4F1D37788E006A8260 /* GPXFile.swift */; };
 		A0E0B00F1D379C21007F6F62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0E0B00D1D379C21007F6F62 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +23,10 @@
 		4C2F761D1D36B2460055FFAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "location-spoofer/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		4C2F76211D36B2460055FFAE /* GPXManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPXManager.swift; path = "location-spoofer/GPXManager.swift"; sourceTree = SOURCE_ROOT; };
 		4C2F76221D36B2460055FFAE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "location-spoofer/Info.plist"; sourceTree = SOURCE_ROOT; };
-		4C2F76231D36B2460055FFAE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "location-spoofer/ViewController.swift"; sourceTree = SOURCE_ROOT; };
+		4C2F76231D36B2460055FFAE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "location-spoofer/MapViewController.swift"; sourceTree = SOURCE_ROOT; };
+		4CA2190C1D382F6F00F7A031 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowController.swift; path = "location-spoofer/WindowController.swift"; sourceTree = SOURCE_ROOT; };
+		4CA86E061D3847070098B17A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = "location-spoofer/SettingsViewController.swift"; sourceTree = SOURCE_ROOT; };
+		4CA86E071D3847070098B17A /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = "location-spoofer/SettingsViewController.xib"; sourceTree = SOURCE_ROOT; };
 		A0042D4F1D37788E006A8260 /* GPXFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPXFile.swift; path = "location-spoofer/GPXFile.swift"; sourceTree = SOURCE_ROOT; };
 		A00847321D362B310023E563 /* location-spoofer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "location-spoofer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E0B00E1D379C21007F6F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "location-spoofer/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -54,6 +60,26 @@
 			name = GPX;
 			sourceTree = "<group>";
 		};
+		4CA86E041D3846D20098B17A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4CA86E061D3847070098B17A /* SettingsViewController.swift */,
+				4CA86E071D3847070098B17A /* SettingsViewController.xib */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		4CA86E051D3846DE0098B17A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A0E0B00D1D379C21007F6F62 /* Main.storyboard */,
+				4CA86E041D3846D20098B17A /* Settings */,
+				4CA2190C1D382F6F00F7A031 /* WindowController.swift */,
+				4C2F76231D36B2460055FFAE /* MapViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		A00847291D362B310023E563 = {
 			isa = PBXGroup;
 			children = (
@@ -74,10 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				4C2F761D1D36B2460055FFAE /* Assets.xcassets */,
-				A0E0B00D1D379C21007F6F62 /* Main.storyboard */,
 				4C2F761C1D36B2460055FFAE /* AppDelegate.swift */,
 				4C9CE7F51D37D659006226FC /* GPX */,
-				4C2F76231D36B2460055FFAE /* ViewController.swift */,
+				4CA86E051D3846DE0098B17A /* ViewControllers */,
 				4C2F762A1D36B26B0055FFAE /* Other */,
 			);
 			name = "location-spoofer";
@@ -146,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0E0B00F1D379C21007F6F62 /* Main.storyboard in Resources */,
+				4CA86E091D3847070098B17A /* SettingsViewController.xib in Resources */,
 				4C2F76251D36B2460055FFAE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,10 +199,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C2F76291D36B2460055FFAE /* ViewController.swift in Sources */,
+				4C2F76291D36B2460055FFAE /* MapViewController.swift in Sources */,
+				4CA2190D1D382F6F00F7A031 /* WindowController.swift in Sources */,
 				4C2F76241D36B2460055FFAE /* AppDelegate.swift in Sources */,
 				4C2F76271D36B2460055FFAE /* GPXManager.swift in Sources */,
 				A0042D501D37788E006A8260 /* GPXFile.swift in Sources */,
+				4CA86E081D3847070098B17A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

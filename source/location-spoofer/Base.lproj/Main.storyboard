@@ -651,15 +651,117 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="location_spoofer" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="600" height="500"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="600" height="500"/>
+                        <toolbar key="toolbar" implicitIdentifier="91E6B86D-6CFB-40DF-9AD5-3933F1C7837C" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="h33-6U-yT1">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="011405FF-A5D5-4843-BE5B-44EDAD2775B5" label="Custom View" paletteLabel="Custom View" id="ZbB-r1-ULf">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="82" height="32"/>
+                                    <size key="maxSize" width="122" height="43"/>
+                                    <button key="view" verticalHuggingPriority="750" id="Fnj-iS-B0S">
+                                        <rect key="frame" x="0.0" y="14" width="122" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Select start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PZo-Bz-VMr">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="startButtonClickedWithSender:" target="B8D-0N-5wS" id="JYI-pk-gF8"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="471623F4-3E66-48DF-BA2E-4D4EFF9FB347" label="Custom View" paletteLabel="Custom View" id="uWl-sO-y36">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="82" height="32"/>
+                                    <size key="maxSize" width="117" height="43"/>
+                                    <button key="view" verticalHuggingPriority="750" id="3bX-iO-txn">
+                                        <rect key="frame" x="0.0" y="14" width="117" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Select end" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Iqi-Nj-ifY">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="endButtonClickedWithSender:" target="B8D-0N-5wS" id="Wz8-VT-fs7"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="A23A78F2-F753-4453-BE7F-F9BF3D346DBA" label="Custom View" paletteLabel="Custom View" id="f6f-2B-xvi">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="173" height="28"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="MJF-de-w2a">
+                                        <rect key="frame" x="0.0" y="14" width="154" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="3Sb-Y0-CUZ">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Run" tag="101"/>
+                                                <segment label="Pause" tag="102"/>
+                                                <segment label="Stop" tag="101"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="runPauseStopSegmentedControllerClick:" target="B8D-0N-5wS" id="FSS-wd-RHs"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="iFR-Kh-est"/>
+                                <toolbarItem implicitItemIdentifier="BAEDEA58-D997-426D-A3C8-CCC4EAB5C3A8" label="Custom View" paletteLabel="Custom View" id="9UH-YM-nPv">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="29" height="26"/>
+                                    <size key="maxSize" width="29" height="26"/>
+                                    <button key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" id="Yx7-Xu-ODr">
+                                        <rect key="frame" x="24" y="14" width="29" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="disclosure" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ut7-2e-ACk">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="settingsButtonClickedWithSender:" target="B8D-0N-5wS" id="UP1-AR-wdQ"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="C47D7927-A6ED-46E2-8581-04462D34CAD5" label="Custom View" paletteLabel="Custom View" id="TJ4-C1-NZF">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="38" height="17"/>
+                                    <size key="maxSize" width="150" height="17"/>
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="VE5-Bj-roU">
+                                        <rect key="frame" x="15" y="14" width="47" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="9DR-HB-PeW">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="ZbB-r1-ULf"/>
+                                <toolbarItem reference="uWl-sO-y36"/>
+                                <toolbarItem reference="iFR-Kh-est"/>
+                                <toolbarItem reference="TJ4-C1-NZF"/>
+                                <toolbarItem reference="iFR-Kh-est"/>
+                                <toolbarItem reference="f6f-2B-xvi"/>
+                                <toolbarItem reference="9UH-YM-nPv"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                     </window>
                     <connections>
+                        <outlet property="endButton" destination="3bX-iO-txn" id="DKh-nt-ISg"/>
+                        <outlet property="runPauseStopSegmentedControl" destination="MJF-de-w2a" id="xo5-hX-TlZ"/>
+                        <outlet property="settingsButton" destination="Yx7-Xu-ODr" id="op9-S2-8gw"/>
+                        <outlet property="startButton" destination="Fnj-iS-B0S" id="vJ3-xB-Wuy"/>
+                        <outlet property="statusLabel" destination="VE5-Bj-roU" id="dah-VQ-jEg"/>
+                        <outlet property="toolbar" destination="h33-6U-yT1" id="A3y-xX-NUS"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
@@ -667,10 +769,10 @@
             </objects>
             <point key="canvasLocation" x="268" y="262"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="location_spoofer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="MapViewController" customModule="location_spoofer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -678,161 +780,16 @@
                             <mapView mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUX-C7-bb9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
                             </mapView>
-                            <visualEffectView canDrawConcurrently="YES" appearanceType="vibrantLight" blendingMode="withinWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="pUr-It-0ez">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
-                                <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="5De-Cr-tH3">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
-                                        <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5W0-W5-AO2">
-                                                <rect key="frame" x="14" y="23" width="112" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="i1w-zW-mJN"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="push" title="Start" alternateTitle="Click location" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bne-SJ-MtA">
-                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="startButtonClickedWithSender:" target="XfG-lQ-9wD" id="Qjp-1F-STS"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VFN-Xl-Fnw">
-                                                <rect key="frame" x="474" y="3" width="112" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="0fb-b3-rxp"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="push" title="Pause" alternateTitle="Resume" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="53e-TZ-5tV">
-                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="pauseButtonClickedWithSender:" target="XfG-lQ-9wD" id="gnn-pE-EGa"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QSx-zg-BFw">
-                                                <rect key="frame" x="134" y="23" width="112" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="YK3-EI-31A"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="push" title="End" alternateTitle="Click location" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zqb-wV-olf">
-                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="endButtonClickedWithSender:" target="XfG-lQ-9wD" id="QOc-Lg-Nhd"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O8a-bS-juO">
-                                                <rect key="frame" x="474" y="23" width="112" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="9Sq-pQ-ORt"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="push" title="Run" alternateTitle="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="lfb-Zs-InF">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="runButtonClickedWithSender:" target="XfG-lQ-9wD" id="xBo-ZA-IQi"/>
-                                                </connections>
-                                            </button>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1c0-dZ-3Y0">
-                                                <rect key="frame" x="18" y="3" width="104" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="ETu-aG-MT2"/>
-                                                    <constraint firstAttribute="width" constant="100" id="TZl-cz-Cvk"/>
-                                                </constraints>
-                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="No location" id="YTW-S2-QUI">
-                                                    <font key="font" metaFont="system" size="8"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2ha-nC-yyN">
-                                                <rect key="frame" x="138" y="3" width="104" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="BZO-g8-KYO"/>
-                                                    <constraint firstAttribute="height" constant="25" id="Cl4-60-Zz0"/>
-                                                </constraints>
-                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="No location" id="ZNm-01-7xU">
-                                                    <font key="font" metaFont="system" size="8"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="OQQ-2m-72i">
-                                                <rect key="frame" x="258" y="31" width="64" height="18"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="PFd-Bi-fne"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="check" title="Route" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IVS-Fw-Ot2">
-                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="routeCheckmarkClickedWithSender:" target="XfG-lQ-9wD" id="IbA-Gb-b2M"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="2ha-nC-yyN" firstAttribute="leading" secondItem="1c0-dZ-3Y0" secondAttribute="trailing" constant="20" id="259-px-kAa"/>
-                                            <constraint firstItem="2ha-nC-yyN" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="15" id="93P-Or-dvy"/>
-                                            <constraint firstItem="1c0-dZ-3Y0" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="15" id="Dxi-Nk-CDW"/>
-                                            <constraint firstItem="O8a-bS-juO" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="-10" id="Ey1-a6-795"/>
-                                            <constraint firstItem="VFN-Xl-Fnw" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="10" id="Fgk-3i-JTz"/>
-                                            <constraint firstItem="5W0-W5-AO2" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="-10" id="Q0u-fc-mvs"/>
-                                            <constraint firstItem="OQQ-2m-72i" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="-10" id="SDu-iH-bOT"/>
-                                            <constraint firstAttribute="trailing" secondItem="VFN-Xl-Fnw" secondAttribute="trailing" constant="20" id="TSs-RJ-S5w"/>
-                                            <constraint firstItem="5W0-W5-AO2" firstAttribute="leading" secondItem="5De-Cr-tH3" secondAttribute="leading" constant="20" id="fdD-Z0-yaz"/>
-                                            <constraint firstAttribute="height" constant="60" id="q0m-oJ-8Wb"/>
-                                            <constraint firstAttribute="trailing" secondItem="O8a-bS-juO" secondAttribute="trailing" constant="20" id="qQO-gq-9el"/>
-                                            <constraint firstItem="1c0-dZ-3Y0" firstAttribute="leading" secondItem="5De-Cr-tH3" secondAttribute="leading" constant="20" id="rnH-83-1nF"/>
-                                            <constraint firstItem="OQQ-2m-72i" firstAttribute="leading" secondItem="QSx-zg-BFw" secondAttribute="trailing" constant="20" id="tCt-qo-Nei"/>
-                                            <constraint firstItem="QSx-zg-BFw" firstAttribute="centerY" secondItem="5De-Cr-tH3" secondAttribute="centerY" constant="-10" id="tsP-Xw-haZ"/>
-                                            <constraint firstItem="QSx-zg-BFw" firstAttribute="leading" secondItem="5W0-W5-AO2" secondAttribute="trailing" constant="20" id="uDu-dL-XTR"/>
-                                        </constraints>
-                                    </customView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="5De-Cr-tH3" firstAttribute="leading" secondItem="pUr-It-0ez" secondAttribute="leading" id="2zA-um-S3x"/>
-                                    <constraint firstAttribute="trailing" secondItem="5De-Cr-tH3" secondAttribute="trailing" id="9fm-10-CA7"/>
-                                    <constraint firstItem="5De-Cr-tH3" firstAttribute="top" secondItem="pUr-It-0ez" secondAttribute="top" id="9g3-Yh-Mk5"/>
-                                    <constraint firstAttribute="bottom" secondItem="5De-Cr-tH3" secondAttribute="bottom" id="kgB-oU-HDW"/>
-                                    <constraint firstAttribute="height" constant="60" id="sQ2-1o-gn9"/>
-                                </constraints>
-                            </visualEffectView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nrr-mB-brj">
-                                <rect key="frame" x="524" y="462" width="60" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" title="Status" bezelStyle="round" id="LTp-Kl-LmY">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pUr-It-0ez" secondAttribute="trailing" id="4DU-uh-557"/>
                             <constraint firstItem="pUX-C7-bb9" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="CT3-7d-md9"/>
                             <constraint firstAttribute="trailing" secondItem="pUX-C7-bb9" secondAttribute="trailing" id="PH7-D1-zbN"/>
                             <constraint firstAttribute="bottom" secondItem="pUX-C7-bb9" secondAttribute="bottom" id="X9b-aC-tvD"/>
-                            <constraint firstAttribute="bottom" secondItem="pUr-It-0ez" secondAttribute="bottom" id="bpG-po-cj3"/>
-                            <constraint firstAttribute="trailing" secondItem="Nrr-mB-brj" secondAttribute="trailing" constant="16" id="cQf-Yc-WOG"/>
-                            <constraint firstItem="pUr-It-0ez" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="egU-Me-vOu"/>
                             <constraint firstItem="pUX-C7-bb9" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="gxi-vh-X00"/>
-                            <constraint firstItem="Nrr-mB-brj" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="16" id="qPZ-Tm-rvF"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="endButton" destination="QSx-zg-BFw" id="Rfi-gz-1qL"/>
-                        <outlet property="endLocationLabel" destination="2ha-nC-yyN" id="xId-7a-WZd"/>
                         <outlet property="mapView" destination="pUX-C7-bb9" id="3V7-8g-L0D"/>
-                        <outlet property="pauseButton" destination="VFN-Xl-Fnw" id="H77-Ro-VrB"/>
-                        <outlet property="routeCheckMark" destination="OQQ-2m-72i" id="6yC-Mo-m7J"/>
-                        <outlet property="runButton" destination="O8a-bS-juO" id="ck5-9y-gr3"/>
-                        <outlet property="startButton" destination="5W0-W5-AO2" id="HML-rp-v5n"/>
-                        <outlet property="startLocationLabel" destination="1c0-dZ-3Y0" id="kRi-gU-aAi"/>
-                        <outlet property="statusLabel" destination="Nrr-mB-brj" id="lwa-ej-sLa"/>
-                        <outlet property="visualEffectView" destination="pUr-It-0ez" id="Pv4-GK-rNd"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -8,8 +8,6 @@
 
 import MapKit
 
-let speed = 2.0
-
 protocol GPXManagerDelegate: class {
   func gpxManager(manager: GPXManager, didUpdateCurrentLocation location: CLLocationCoordinate2D?)
   func gpxManager(manager: GPXManager, didCompleteRouteAtLocation location: CLLocationCoordinate2D?)
@@ -28,6 +26,8 @@ class GPXManager {
   
   // props
   weak var delegate: GPXManagerDelegate?
+  
+  var trackingSpeed = TrackingSpeed.walking
   
   private let file = GPXFile()
   private var timer: Timer?
@@ -97,7 +97,7 @@ class GPXManager {
         let start = locations[index]
         let end = locations[nextIndex]
         let distance = CLLocation(coordinate: end).distance(from: CLLocation(coordinate: start))
-        let numberOfSteps = Int(distance/speed)
+        let numberOfSteps = Int(distance/trackingSpeed.rawValue)
         let differenceLat = (end.latitude - start.latitude) / Double(numberOfSteps)
         let differenceLng = (end.longitude - start.longitude) / Double(numberOfSteps)
         
