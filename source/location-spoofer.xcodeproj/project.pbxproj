@@ -313,7 +313,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/location-spoofer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.nahive.location-spoofer";
-				PRODUCT_NAME = "location-spoofer";
+				PRODUCT_NAME = LocationSpoofer;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -328,7 +328,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/location-spoofer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.nahive.location-spoofer";
-				PRODUCT_NAME = "location-spoofer";
+				PRODUCT_NAME = LocationSpoofer;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
