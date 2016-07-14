@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/Assets.car</key>
+		<data>
+		0wj9GuBreWuXHieECyZH6ktefEY=
+		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
 		FiPNoA4znbCn7hwMYXaedt/N3mg=
@@ -143,6 +147,17 @@
 			</data>
 			<key>requirement</key>
 			<string>cdhash H"e0ee494d87e954ef9bf863df2308e4931ef18680" or cdhash H"b218a2394c8ad5a895afedd0b80816f031ae8836"</string>
+		</dict>
+		<key>Resources/Assets.car</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0wj9GuBreWuXHieECyZH6ktefEY=
+			</data>
+			<key>hash2</key>
+			<data>
+			3XVr0FALNN7l1bjRKqF57r34kvxkwKUjF012PE1mcbw=
+			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
